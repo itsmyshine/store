@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:p="http://www.springframework.org/schema/p"
-  xmlns:mvc="http://www.springframework.org/schema/mvc"
-  xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
       				  http://www.springframework.org/schema/beans/spring-beans.xsd
       				  http://www.springframework.org/schema/mvc
       				  http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -13,36 +11,37 @@
       	  				http://code.alibabatech.com/schema/dubbo/dubbo.xsd
       				  http://www.springframework.org/schema/context
       				  http://www.springframework.org/schema/context/spring-context.xsd">
-  	
-  	<!-- 配置开启组件扫描 -->
-	<context:component-scan base-package="com.store.controller"/>
-	
+
+	<!-- 配置开启组件扫描 -->
+	<context:component-scan base-package="com.store.controller" />
+
 	<!-- 开启MVC注解驱动 -->
-	<mvc:annotation-driven/>
-	
+	<mvc:annotation-driven />
+
 	<!-- 配置视图解析器 -->
 	<mvc:view-resolvers>
-		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
+		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</mvc:view-resolvers>
-	
+
 	<!-- 配置静态资源用WEB容器默认的servlet来处理 -->
-	<mvc:default-servlet-handler/>
-	
+	<mvc:default-servlet-handler />
+
 	<!-- 配置视图与控制器 -->
-	<mvc:view-controller path="/" view-name="index"/>
-	
-	
-	<!-- ############## 配置Dubbo服务消费者 ############## -->
-	<!-- 配置当前应用的名称 -->
-  	<!-- <dubbo:application name="store-web"/> -->
-  	
-  	<!-- 配置注册中心，采用multicast广播的方式来发现服务名称  224.0.0.0 - 239.255.255.255-->
-	<!-- <dubbo:registry address="multicast://224.1.2.3:1234"/> -->
-	
-	<!-- 配置引用服务，产生服务接口的代理对象 -->
-	<!-- <dubbo:reference interface="com.store.service.TestService" 
-			id="testService" timeout="60000"/> -->
-	
-	
-  	
- </beans>
+	<mvc:view-controller path="/" view-name="index" />
+
+
+	<!-- ###### 配置dubbo消费端 ###### -->
+	<!-- 配置当前应用名称 -->
+	<dubbo:application name="store-admin-web" />
+
+	<!-- 配置服务注册中心，使用multicast广播注册中心发现服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="192.168.25.129:2181" />
+
+	<!-- 配置引用的服务，生成远程服务接口的代理对象 -->
+	<dubbo:reference interface="com.store.service.ItemService"
+		id="itemService" timeout="10000" />
+
+
+
+
+</beans>

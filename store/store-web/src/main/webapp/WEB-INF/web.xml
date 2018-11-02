@@ -8,7 +8,7 @@
 
 	<!-- 配置Spring MVC前端控制器(核心控制器) -->
 	<servlet>
-		<servlet-name>taotao-admin</servlet-name>
+		<servlet-name>store-admin</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -17,7 +17,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>taotao-admin</servlet-name>
+		<servlet-name>store-admin</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	

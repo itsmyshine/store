@@ -64,6 +64,16 @@
 			<artifactId>store-admin-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- zookeeper分布式协调服务 -->
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
+		<!-- zkclient(zookeeper客户端) -->
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
 
 	</dependencies>
 

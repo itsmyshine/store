@@ -6,9 +6,7 @@
 		<artifactId>store-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.store</groupId>
 	<artifactId>store-admin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>store-admin-pojo</module>

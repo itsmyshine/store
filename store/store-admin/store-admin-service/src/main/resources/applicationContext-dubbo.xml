@@ -10,4 +10,17 @@
       				  http://code.alibabatech.com/schema/dubbo 
       				  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+	<!-- 配置当前应用名称 -->
+	<dubbo:application name="store-admin-service" />
+
+	<!-- 配置服务注册中心，使用multicast广播注册中心暴露服务地址224.0.0.0 - 239.255.255.255 -->
+	<dubbo:registry protocol="zookeeper" address="192.168.25.129:2181" />
+
+	<!-- 配置用dubbo协议在20880端口暴露服务；端口号唯一即可 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- 配置需要暴露的服务 -->
+	<dubbo:service interface="com.store.service.ItemService"
+		ref="itemServiceImpl" />
+
 </beans>
