@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
 	<!-- 全局的设置信息 -->
 	<settings>
 		<!-- 配置用生成的主键值 -->
@@ -16,5 +17,16 @@
 		<setting name="aggressiveLazyLoading" value="false" />
 		<!-- 开启驼峰命名(方便自动映射) -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
+
+	<!-- 配置插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- 配置方言 -->
+			<property name="helperDialect" value="mysql" />
+			<!-- 配置统计总录数 -->
+			<property name="rowBoundsWithCount" value="true" />
+		</plugin>
+	</plugins>
 </configuration>

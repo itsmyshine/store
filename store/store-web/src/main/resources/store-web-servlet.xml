@@ -40,8 +40,8 @@
 	<!-- 配置引用的服务，生成远程服务接口的代理对象 -->
 	<dubbo:reference interface="com.store.service.ItemService"
 		id="itemService" timeout="10000" />
-
-
+	<dubbo:reference interface="com.store.service.ItemCatService"
+		id="itemCatService" timeout="10000" />
 
 
 </beans>

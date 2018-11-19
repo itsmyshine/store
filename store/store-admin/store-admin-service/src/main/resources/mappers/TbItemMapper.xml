@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.store.mapper.ItemMapper">
+	<resultMap id="BaseResultMap" type="com.store.pojo.TbItem">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="sell_point" property="sellPoint" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="BIGINT" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+		<result column="barcode" property="barcode" jdbcType="VARCHAR" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+		<result column="cid" property="cid" jdbcType="BIGINT" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="created" property="created" jdbcType="TIMESTAMP" />
+		<result column="updated" property="updated" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="findAllItems" resultType="com.store.pojo.TbItem">
+		select * from tb_item
+	</select>
+	<insert id="saveItem" parameterType="com.store.pojo.TbItem"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into tb_item (id,
+		title,
+		sell_point, price, num, barcode, image, cid, status, created,
+		updated)
+		values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
+		#{sellPoint,jdbcType=VARCHAR},
+		#{price,jdbcType=BIGINT},
+		#{num,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR},
+		#{image,jdbcType=VARCHAR}, #{cid,jdbcType=BIGINT},
+		#{status,jdbcType=TINYINT},
+		#{created,jdbcType=TIMESTAMP},
+		#{updated,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="saveItemDesc" parameterType="com.store.pojo.TbItemDesc">
+		insert into tb_item_desc
+		(item_id, created, updated,
+		item_desc)
+		values
+		(#{itemId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP},
+		#{updated,jdbcType=TIMESTAMP},
+		#{itemDesc,jdbcType=LONGVARCHAR})
+	</insert>
+	<update id="updateItem" parameterType="com.store.pojo.TbItem">
+		update tb_item
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="sellPoint != null">
+				sell_point = #{sellPoint,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=BIGINT},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=INTEGER},
+			</if>
+			<if test="barcode != null">
+				barcode = #{barcode,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				image = #{image,jdbcType=VARCHAR},
+			</if>
+			<if test="cid != null">
+				cid = #{cid,jdbcType=BIGINT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				created = #{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updated != null">
+				updated = #{updated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateItemDesc" parameterType="com.store.pojo.TbItemDesc">
+		update tb_item_desc
+		<set>
+			<if test="created != null">
+				created = #{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updated != null">
+				updated = #{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="itemDesc != null">
+				item_desc = #{itemDesc,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where item_id = #{itemId,jdbcType=BIGINT}
+	</update>
+	<delete id="delItem">
+		delete from tb_item where id in (${ids})
+	</delete>
+	<delete id="delItemDesc">
+		delete from tb_item_desc where item_id in (${ids})
+	</delete>
+	<update id="instock">
+		update tb_item set status = 2 where id in (${ids})
+	</update>
+	<update id="reshelf">
+		update tb_item set status = 1 where id in (${ids})
+	</update>
+</mapper>

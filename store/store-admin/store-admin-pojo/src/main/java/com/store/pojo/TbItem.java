@@ -1,8 +1,18 @@
 package com.store.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TbItem {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "tb_item")
+public class TbItem implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -112,4 +122,10 @@ public class TbItem {
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
+
+	@Override
+	public String toString(){
+		return "TbItem [id="+id+", title="+title+", sellPoint="+sellPoint+", price="+price+", num="+num+", barcode="+barcode+", image="+image+", cid="+cid+", status="+status+", created="+created+", updated="+updated+"]";
+	}
+    
 }

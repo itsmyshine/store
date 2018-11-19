@@ -1,10 +1,12 @@
 package com.store.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TbItemDescExample {
+public class TbItemDescExample implements Serializable{
+	private static final long serialVersionUID = 1L;
     protected String orderByClause;
 
     protected boolean distinct;

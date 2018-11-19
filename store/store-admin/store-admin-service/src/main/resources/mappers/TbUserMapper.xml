@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.store.mapper.TbItemMapper" >
-  <resultMap id="BaseResultMap" type="com.store.pojo.TbItem" >
+<mapper namespace="com.store.mapper.TbUserMapper" >
+  <resultMap id="BaseResultMap" type="com.store.pojo.TbUser" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="sell_point" property="sellPoint" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="BIGINT" />
-    <result column="num" property="num" jdbcType="INTEGER" />
-    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
-    <result column="image" property="image" jdbcType="VARCHAR" />
-    <result column="cid" property="cid" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -73,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, sell_point, price, num, barcode, image, cid, status, created, updated
+    id, username, password, phone, email, created, updated
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.store.pojo.TbItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.store.pojo.TbUserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_item
+    from tb_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,58 +88,44 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tb_item
+    from tb_user
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tb_item
+    delete from tb_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.store.pojo.TbItemExample" >
-    delete from tb_item
+  <delete id="deleteByExample" parameterType="com.store.pojo.TbUserExample" >
+    delete from tb_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.store.pojo.TbItem" >
-    insert into tb_item (id, title, sell_point, 
-      price, num, barcode, 
-      image, cid, status, 
-      created, updated)
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{sellPoint,jdbcType=VARCHAR}, 
-      #{price,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{cid,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
-      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.store.pojo.TbUser" >
+    insert into tb_user (id, username, password, 
+      phone, email, created, 
+      updated)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{updated,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.store.pojo.TbItem" >
-    insert into tb_item
+  <insert id="insertSelective" parameterType="com.store.pojo.TbUser" >
+    insert into tb_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="title != null" >
-        title,
+      <if test="username != null" >
+        username,
       </if>
-      <if test="sellPoint != null" >
-        sell_point,
+      <if test="password != null" >
+        password,
       </if>
-      <if test="price != null" >
-        price,
+      <if test="phone != null" >
+        phone,
       </if>
-      <if test="num != null" >
-        num,
-      </if>
-      <if test="barcode != null" >
-        barcode,
-      </if>
-      <if test="image != null" >
-        image,
-      </if>
-      <if test="cid != null" >
-        cid,
-      </if>
-      <if test="status != null" >
-        status,
+      <if test="email != null" >
+        email,
       </if>
       <if test="created != null" >
         created,
@@ -156,29 +138,17 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="sellPoint != null" >
-        #{sellPoint,jdbcType=VARCHAR},
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=BIGINT},
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="num != null" >
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="barcode != null" >
-        #{barcode,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null" >
-        #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="cid != null" >
-        #{cid,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
@@ -188,41 +158,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.store.pojo.TbItemExample" resultType="java.lang.Integer" >
-    select count(*) from tb_item
+  <select id="countByExample" parameterType="com.store.pojo.TbUserExample" resultType="java.lang.Integer" >
+    select count(*) from tb_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_item
+    update tb_user
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.title != null" >
-        title = #{record.title,jdbcType=VARCHAR},
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.sellPoint != null" >
-        sell_point = #{record.sellPoint,jdbcType=VARCHAR},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=BIGINT},
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="record.num != null" >
-        num = #{record.num,jdbcType=INTEGER},
-      </if>
-      <if test="record.barcode != null" >
-        barcode = #{record.barcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.image != null" >
-        image = #{record.image,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cid != null" >
-        cid = #{record.cid,jdbcType=BIGINT},
-      </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=TINYINT},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
@@ -236,48 +194,32 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_item
+    update tb_user
     set id = #{record.id,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      sell_point = #{record.sellPoint,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=BIGINT},
-      num = #{record.num,jdbcType=INTEGER},
-      barcode = #{record.barcode,jdbcType=VARCHAR},
-      image = #{record.image,jdbcType=VARCHAR},
-      cid = #{record.cid,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=TINYINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       created = #{record.created,jdbcType=TIMESTAMP},
       updated = #{record.updated,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.store.pojo.TbItem" >
-    update tb_item
+  <update id="updateByPrimaryKeySelective" parameterType="com.store.pojo.TbUser" >
+    update tb_user
     <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="sellPoint != null" >
-        sell_point = #{sellPoint,jdbcType=VARCHAR},
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=BIGINT},
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="num != null" >
-        num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="barcode != null" >
-        barcode = #{barcode,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null" >
-        image = #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="cid != null" >
-        cid = #{cid,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
@@ -288,16 +230,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.store.pojo.TbItem" >
-    update tb_item
-    set title = #{title,jdbcType=VARCHAR},
-      sell_point = #{sellPoint,jdbcType=VARCHAR},
-      price = #{price,jdbcType=BIGINT},
-      num = #{num,jdbcType=INTEGER},
-      barcode = #{barcode,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      cid = #{cid,jdbcType=BIGINT},
-      status = #{status,jdbcType=TINYINT},
+  <update id="updateByPrimaryKey" parameterType="com.store.pojo.TbUser" >
+    update tb_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

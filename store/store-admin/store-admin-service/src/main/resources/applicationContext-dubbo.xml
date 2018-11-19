@@ -20,7 +20,7 @@
 	<dubbo:protocol name="dubbo" port="20880" />
 
 	<!-- 配置需要暴露的服务 -->
-	<dubbo:service interface="com.store.service.ItemService"
-		ref="itemServiceImpl" />
+	<dubbo:service interface="com.store.service.ItemService" ref="itemServiceImpl" />
+	<dubbo:service interface="com.store.service.ItemCatService" ref="itemCatServiceImpl" />
 
 </beans>
